@@ -119,12 +119,26 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gray-100 p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">
-          宏福苑報平安
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-3">
+          宏福苑報平安【齋睇】
         </h1>
-        <p className="text-gray-600 mb-6 text-sm md:text-base">
-          此為唯讀檢視(read-only)，會自動更新。如需報平安，請使用原始試算表。
-        </p>
+        <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6">
+          <p className="text-yellow-800 font-medium mb-1">
+            此頁面只供查閱，無法報平安！
+          </p>
+          <p className="text-yellow-700 text-sm">
+            如需報平安，請使用
+            <a
+              href="https://docs.google.com/spreadsheets/d/1yPrGPx0hsd3uIGEI8M23O1YOeT-kT96C_L6lr8yohvM"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 underline font-medium mx-1"
+            >
+              原始試算表
+            </a>
+            。此頁面每 5 分鐘自動更新一次。
+          </p>
+        </div>
 
         {error && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
