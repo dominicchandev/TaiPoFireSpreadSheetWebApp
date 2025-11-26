@@ -12,12 +12,8 @@ interface ApiResponse {
   error?: string;
 }
 
-// Generate random interval between 4-6 minutes (around 5 min with variance)
-function getRandomInterval(): number {
-  const baseInterval = 5 * 60 * 1000; // 5 minutes
-  const variance = 60 * 1000; // +/- 1 minute
-  return baseInterval + (Math.random() * variance * 2 - variance);
-}
+// Fixed 5 minute interval
+const REFRESH_INTERVAL = 5 * 60 * 1000; // 5 minutes
 
 export default function Home() {
   const [data, setData] = useState<ApiResponse | null>(null);
@@ -68,8 +64,7 @@ export default function Home() {
       clearInterval(countdownRef.current);
     }
 
-    const interval = getRandomInterval();
-    setNextRefreshIn(Math.round(interval / 1000));
+    setNextRefreshIn(Math.round(REFRESH_INTERVAL / 1000));
 
     // Countdown timer
     countdownRef.current = setInterval(() => {
@@ -81,7 +76,7 @@ export default function Home() {
       setIframeKey((k) => k + 1);
       setLastUpdated(new Date());
       scheduleNextRefresh();
-    }, interval);
+    }, REFRESH_INTERVAL);
   }, []);
 
   // Initial fetch on mount
