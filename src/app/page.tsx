@@ -117,22 +117,44 @@ export default function Home() {
         <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-3">
           宏福苑報平安【齋睇】
         </h1>
-        <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6">
-          <p className="text-yellow-800 font-medium mb-1">
+        <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6">
+          <p className="text-amber-800 font-semibold mb-4 text-center">
             此頁面只供查閱，無法報平安！
           </p>
-          <p className="text-yellow-700 text-sm">
-            如需報平安，請使用
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSc64NpaVIcAkg92fanI5W34xXwpoTnxXu0QozccOiRf3cAZYw/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 bg-green-600 hover:bg-green-700 text-white rounded-lg p-4 transition-colors shadow-sm"
+            >
+              <div className="bg-white/20 rounded-full p-2">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <div className="font-bold text-lg">報平安</div>
+                <div className="text-green-100 text-sm">填寫 Google 表格</div>
+              </div>
+            </a>
             <a
               href="https://docs.google.com/spreadsheets/d/1yPrGPx0hsd3uIGEI8M23O1YOeT-kT96C_L6lr8yohvM"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 underline font-medium mx-1"
+              className="flex items-center gap-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg p-4 transition-colors shadow-sm"
             >
-              原始試算表
+              <div className="bg-white/20 rounded-full p-2">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              </div>
+              <div>
+                <div className="font-bold text-lg">原始試算表</div>
+                <div className="text-blue-100 text-sm">報平安 / 報險情 / 大廈資訊</div>
+              </div>
             </a>
-            。此頁面每 5 分鐘自動更新一次。
-          </p>
+          </div>
         </div>
 
         {error && (
