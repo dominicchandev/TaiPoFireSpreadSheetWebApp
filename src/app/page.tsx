@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
+import Link from "next/link";
 
 interface SheetTab {
   name: string;
@@ -121,22 +122,39 @@ export default function Home() {
           <p className="text-amber-800 font-semibold mb-4 text-center">
             此頁面只供查閱，無法報平安！
           </p>
-          <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLSc64NpaVIcAkg92fanI5W34xXwpoTnxXu0QozccOiRf3cAZYw/viewform"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg p-4 transition-colors shadow-sm"
-          >
-            <div className="bg-white/20 rounded-full p-2">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <div>
-              <div className="font-bold text-lg">報平安</div>
-              <div className="text-blue-100 text-sm">填寫 Google 表格</div>
-            </div>
-          </a>
+          <div className="flex flex-col md:flex-row gap-4 justify-center">
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSc64NpaVIcAkg92fanI5W34xXwpoTnxXu0QozccOiRf3cAZYw/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg p-4 transition-colors shadow-sm"
+            >
+              <div className="bg-white/20 rounded-full p-2">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <div className="font-bold text-lg">報平安</div>
+                <div className="text-blue-100 text-sm">填寫 Google 表格</div>
+              </div>
+            </a>
+
+            <Link
+              href="/sos"
+              className="flex-1 flex items-center justify-center gap-3 bg-red-600 hover:bg-red-700 text-white rounded-lg p-4 transition-colors shadow-sm"
+            >
+              <div className="bg-white/20 rounded-full p-2">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+              </div>
+              <div>
+                <div className="font-bold text-lg">失聯/求救 list</div>
+                <div className="text-red-100 text-sm">查看受保護名單</div>
+              </div>
+            </Link>
+          </div>
         </div>
 
         {error && (
