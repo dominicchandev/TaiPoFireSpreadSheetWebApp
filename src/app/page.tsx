@@ -113,88 +113,113 @@ export default function Home() {
   const iframeSrc = activeTab ? `/api/sheets?gid=${activeTab}` : "";
 
   return (
-    <main className="min-h-screen bg-gray-100 p-4 md:p-8">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-3">
-          宏福苑報平安【齋睇】
-        </h1>
-        <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6">
-          <p className="text-amber-800 font-semibold mb-4 text-center">
-            此頁面只供查閱，無法報平安！
-          </p>
-          <div className="flex flex-col md:flex-row gap-4 justify-center">
-            <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLSc64NpaVIcAkg92fanI5W34xXwpoTnxXu0QozccOiRf3cAZYw/viewform"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg p-4 transition-colors shadow-sm"
-            >
-              <div className="bg-white/20 rounded-full p-2">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <div>
-                <div className="font-bold text-lg">報平安</div>
-                <div className="text-blue-100 text-sm">填寫 Google 表格</div>
-              </div>
-            </a>
-
-            <Link
-              href="/sos"
-              className="flex-1 flex items-center justify-center gap-3 bg-red-600 hover:bg-red-700 text-white rounded-lg p-4 transition-colors shadow-sm"
-            >
-              <div className="bg-white/20 rounded-full p-2">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                </svg>
-              </div>
-              <div>
-                <div className="font-bold text-lg">失聯/求救 list</div>
-                <div className="text-red-100 text-sm">查看受保護名單</div>
-              </div>
-            </Link>
+    <main className="min-h-screen bg-slate-50">
+      {/* Header Section */}
+      <div className="bg-gradient-to-r from-blue-700 to-blue-900 text-white pb-12 pt-8 px-4 md:px-8 shadow-lg">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+            <div>
+              <h1 className="text-3xl md:text-4xl font-bold mb-2 tracking-tight">
+                宏福苑報平安【齋睇】
+              </h1>
+              <p className="text-blue-100 text-sm md:text-base opacity-90">
+                此頁面只供查閱，無法在此直接報平安
+              </p>
+            </div>
           </div>
+
+          {/* Status Bar in Header */}
+          <div className="flex flex-wrap items-center gap-4 text-xs md:text-sm text-blue-100/80 bg-black/10 inline-flex px-4 py-2 rounded-lg backdrop-blur-sm">
+            {lastUpdated && (
+              <span className="flex items-center">
+                <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                最後更新：{lastUpdated.toLocaleTimeString()}
+              </span>
+            )}
+            {nextRefreshIn > 0 && (
+              <span className="opacity-75 border-l border-white/20 pl-4">
+                {formatCountdown(nextRefreshIn)} 後自動更新
+              </span>
+            )}
+            {loading && <span className="text-white font-semibold animate-pulse">更新中...</span>}
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 md:px-8 -mt-8">
+        {/* Action Buttons */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSc64NpaVIcAkg92fanI5W34xXwpoTnxXu0QozccOiRf3cAZYw/viewform"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center p-4 bg-white rounded-xl shadow-md border border-blue-100 hover:border-blue-300 hover:shadow-lg transition-all duration-200"
+          >
+            <div className="bg-blue-50 text-blue-600 rounded-full p-3 mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div>
+              <div className="font-bold text-lg text-gray-900 group-hover:text-blue-700">我要報平安/失聯/求救</div>
+              <div className="text-gray-500 text-sm">前往 Google 表格填寫資料</div>
+            </div>
+            <svg className="w-5 h-5 ml-auto text-gray-300 group-hover:text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+
+          <Link
+            href="/sos"
+            className="group flex items-center p-4 bg-white rounded-xl shadow-md border border-red-100 hover:border-red-300 hover:shadow-lg transition-all duration-200"
+          >
+            <div className="bg-red-50 text-red-600 rounded-full p-3 mr-4 group-hover:bg-red-600 group-hover:text-white transition-colors">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+            </div>
+            <div>
+              <div className="font-bold text-lg text-gray-900 group-hover:text-red-700">失聯/求救名單</div>
+              <div className="text-gray-500 text-sm">查看受保護的求助列表</div>
+            </div>
+            <svg className="w-5 h-5 ml-auto text-gray-300 group-hover:text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </Link>
         </div>
 
         {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
+          <div className="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded shadow-sm mb-6 flex items-start">
+            <svg className="w-5 h-5 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
             {error}
           </div>
         )}
 
         {loading && !data && (
-          <div className="bg-white rounded-lg shadow p-8 text-center">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
             <p className="text-gray-600">正在載入試算表...</p>
           </div>
         )}
 
         {data && (
-          <>
-            <div className="flex flex-wrap items-center gap-4 mb-4 text-sm text-gray-500">
-              {lastUpdated && (
-                <span>最後更新：{lastUpdated.toLocaleTimeString()}</span>
-              )}
-              {nextRefreshIn > 0 && (
-                <span className="text-gray-400">
-                  {formatCountdown(nextRefreshIn)} 後自動更新
-                </span>
-              )}
-            </div>
-
+          <div className="bg-white rounded-xl shadow-md border border-gray-100 p-4 md:p-6 mb-8">
             {/* Tab Navigation */}
             {data.tabs && data.tabs.length > 0 && (
-              <div className="mb-4 overflow-x-auto">
-                <div className="flex gap-1 border-b border-gray-300 min-w-max">
+              <div className="mb-6 overflow-x-auto pb-2 no-scrollbar">
+                <div className="flex gap-2 min-w-max">
                   {data.tabs.map((tab) => (
                     <button
                       key={tab.gid}
                       onClick={() => handleTabChange(tab.gid)}
-                      className={`px-4 py-2 text-sm font-medium rounded-t-lg transition-colors ${
+                      className={`px-5 py-2.5 text-sm font-medium rounded-lg transition-all whitespace-nowrap ${
                         activeTab === tab.gid
-                          ? "bg-white text-blue-600 border-t border-l border-r border-gray-300 -mb-px"
-                          : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                          ? "bg-gray-900 text-white shadow-md transform scale-105"
+                          : "bg-gray-100 text-gray-600 hover:bg-gray-200 hover:text-gray-900"
                       }`}
                     >
                       {tab.name}
@@ -204,19 +229,19 @@ export default function Home() {
               </div>
             )}
 
-            {/* Sheet Content - iframe loading from our cached API */}
-            {iframeSrc && (
-              <div className="bg-white rounded-lg shadow overflow-hidden">
+            {/* Iframe Container */}
+            <div className="w-full overflow-hidden rounded-lg border border-gray-200 bg-gray-50 shadow-inner min-h-[600px]">
+              {iframeSrc && (
                 <iframe
                   key={iframeKey}
                   src={iframeSrc}
-                  className="w-full border-0"
-                  style={{ height: "75vh", minHeight: "500px" }}
-                  title="試算表檢視"
+                  className="w-full h-[80vh] min-h-[600px]"
+                  title="Google Sheet View"
+                  loading="lazy"
                 />
-              </div>
-            )}
-          </>
+              )}
+            </div>
+          </div>
         )}
       </div>
     </main>
